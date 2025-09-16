@@ -23,3 +23,14 @@ class Sedan extends Carro {
         $this->ano = $ano;
     }
 }
+
+class Caminhonete extends Carro {
+    public $capacidadeCarga;
+    public $tipoCabine;
+
+    public function __construct($modelo, $cor, $ano) {
+        $this->modelo = $modelo;
+        $this->cor = $cor;
+        $this->ano = $ano;
+    }
+}
