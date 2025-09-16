@@ -1,16 +1,36 @@
 <?php
 
 namespace Models;
-use Models\Veiculo;
 
-class Carro extends Veiculo {
+class Carro{
+    public $marca;
     public $modelo;
-    public $cor;
     public $ano;
-
-    public function __construct($modelo, $cor, $ano) {
+    public $cor;
+    public $preco;
+    public $origem;
+    public bool $ehUsado;
+    public $kmRodados;
+    public $kmLitro;
+    public bool $ehAutomatico;
+    public $combustivel;
+    public $status;
+    public $portas;
+    public $conducao;
+    
+    public function __construct($marca, $modelo, $ano, $cor, $preco, $origem, $ehUsado, $km, $ehAutomatico, $combustivel, $status, $portas, $conducao) {
         $this->modelo = $modelo;
         $this->cor = $cor;
         $this->ano = $ano;
+        $this->marca = $marca;
+        $this->preco = $preco;
+        $this->origem = $origem;
+        $this->ehUsado = $ehUsado;
+        $this->km = $km;
+        $this->ehAutomatico = $ehAutomatico;
+        $this->combustivel = $combustivel;
+        $this->portas = $portas;
+        $this->status = $status;
+        $this->conducao = $conducao;
     }
 }
