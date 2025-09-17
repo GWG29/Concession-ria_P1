@@ -1,15 +1,13 @@
 <?php
 namespace Models;
-use Models\carro;
+use Models\Carro;
 
 class SUV extends Carro {
     public $tracao;
     public $OffRoad;
 
     public function __construct($modelo, $cor, $ano) {
-        $this->modelo = $modelo;
-        $this->cor = $cor;
-        $this->ano = $ano;
+        parent::__construct($modelo,$ano,$cor);
     }
 }
 
@@ -18,9 +16,7 @@ class Sedan extends Carro {
     public $conforto;
 
     public function __construct($modelo, $cor, $ano) {
-        $this->modelo = $modelo;
-        $this->cor = $cor;
-        $this->ano = $ano;
+        parent::__construct($modelo,$ano,$cor);
     }
 }
 
@@ -29,8 +25,6 @@ class Caminhonete extends Carro {
     public $tipoCabine;
 
     public function __construct($modelo, $cor, $ano) {
-        $this->modelo = $modelo;
-        $this->cor = $cor;
-        $this->ano = $ano;
+        parent::__construct($modelo,$ano,$cor);
     }
 }

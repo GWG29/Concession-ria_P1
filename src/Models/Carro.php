@@ -2,21 +2,21 @@
 
 namespace Models;
 
-class Carro{
-    public $marca;
-    public $modelo;
-    public $ano;
-    public $cor;
-    public $preco;
-    public $origem;
+abstract class Carro{
+    public string $marca;
+    public string $modelo;
+    public int $ano;
+    public string $cor;
+    public float $preco;
+    public string $origem;
     public bool $ehUsado;
-    public $kmRodados;
-    public $kmLitro;
+    public int $kmRodados;
+    public int $kmLitro;
     public bool $ehAutomatico;
-    public $combustivel;
-    public $status;
-    public $portas;
-    public $conducao;
+    public string $combustivel;
+    public string $status;
+    public int $portas;
+    public string $conducao;
     
     public function __construct($marca, $modelo, $ano, $cor, $preco, $origem, $ehUsado, $km, $ehAutomatico, $combustivel, $status, $portas, $conducao) {
         $this->modelo = $modelo;
