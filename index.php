@@ -2,8 +2,15 @@
 
 require_once __DIR__ . '/src/Core/Autoloader.php';
 
-// Instanciando normalmente, sem 'use'
-$carro = new Carro("Toyota Corolla", "Prata", 2020);
-$vendedor = new Vendedor("João", "12345", "99999-9999", $carro);
+use Models\Cliente;
+use Models\Pessoa;
 
-echo $vendedor->anunciarVenda();
+// Instanciando normalmente, sem 'use'
+$cliente = new Pessoa();
+
+$cliente->nome=readline("Digite o nome do cliente: ");
+$cliente->idade=readline("Digite a idade do cliente: ");
+$cliente->cpf=readline("Digite o CPF do cliente: ");
+$cliente->rg=readline("Digite o RG do cliente: ");
+$cliente->endereco=readline("Digite o endereço do cliente: ");
+echo "Nome: $cliente->nome\nIdade: $cliente->idade\nCPF: $cliente->cpf\nRG: $cliente->rg\nEndereço: $cliente->endereco\n";

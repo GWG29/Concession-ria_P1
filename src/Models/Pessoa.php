@@ -1,7 +1,7 @@
 <?php 
 namespace Models;
 
-abstract class Pessoa {
+class Pessoa {
     public string $nome;
     public int $idade;
     public string $cpf;
