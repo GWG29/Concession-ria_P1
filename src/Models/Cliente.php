@@ -18,25 +18,26 @@ class Clientes extends Pessoa{
         $this->modoPagamento = $modoPagamento;
         $this->Seguro = $Seguro;
         strtolower($this->Seguro) === 'sim' ? $this->querSeguro = true : $this->querSeguro = false;
-        // defini como true naturalmente, porém a pessoa vai poder alterar esse valor na compra
-        // entretanto acho que é válido considerar como positivo o fato de querer seguro.
-
         
     }
 
-    public function getModelo($modeloComprado){
+    public function setModelo($modeloComprado){
         $this->modeloComprado = $modeloComprado;
     }
 
-    public function getCor($corCarro){
+    public function setCor($corCarro){
         $this->corCarro = $corCarro;
     }
 
-    public function getModoPagamento($modoPagamento){
+    public function setModoPagamento($modoPagamento){
         $this->getModoPagamento = $modoPagamento;
     }
 
-    public function getSeguro($querSeguro){
+    public function setSeguro($querSeguro){
         $this->querSeguro = $querSeguro;
+    }
+
+    public function compraCliente($modoPagamento,$modeloComprado,$querSeguro,$entrada,$precoCarro,$valorSeguro){
+        
     }
 }

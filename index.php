@@ -3,7 +3,7 @@
 require_once __DIR__ . '/src/Core/Autoloader.php';
 require_once __DIR__ . '/src/Models/Pessoa.php';
 
-use Models\Pessoa;
+use src\Models\Pessoa;
 
 // Instanciando normalmente, sem 'use'
 $cliente = new Pessoa();
