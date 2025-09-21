@@ -37,7 +37,7 @@ class Clientes extends Pessoa{
         $this->querSeguro = $querSeguro;
     }
 
-    public function compraCliente($modoPagamento,$modeloComprado,$querSeguro,$entrada,$precoCarro,$valorSeguro,$numParcelas = 1){
+    public function compraCliente($modoPagamento,$modeloComprado,$querSeguro,$entrada,$precoCarro,$valorSeguro,$numParcelas = 1): string{
         $this->modoPagamento = $modoPagamento;
         $this->modeloComprado = $modeloComprado;
         $this->querSeguro = $querSeguro;
