@@ -21,23 +21,74 @@ class Clientes extends Pessoa{
         
     }
 
-    public function setModelo($modeloComprado){
+    public function getModelo($modeloComprado){
         $this->modeloComprado = $modeloComprado;
     }
 
-    public function setCor($corCarro){
+    public function getCor($corCarro){
         $this->corCarro = $corCarro;
     }
 
-    public function setModoPagamento($modoPagamento){
+    public function getModoPagamento($modoPagamento){
         $this->getModoPagamento = $modoPagamento;
     }
 
-    public function setSeguro($querSeguro){
+    public function getSeguro($querSeguro){
         $this->querSeguro = $querSeguro;
     }
 
-    public function compraCliente($modoPagamento,$modeloComprado,$querSeguro,$entrada,$precoCarro,$valorSeguro){
-        
+    public function compraCliente($modoPagamento,$modeloComprado,$querSeguro,$entrada,$precoCarro,$valorSeguro,$numParcelas = 1){
+        $this->modoPagamento = $modoPagamento;
+        $this->modeloComprado = $modeloComprado;
+        $this->querSeguro = $querSeguro;
+
+        $valorTotal = $precoCarro;
+        if ($this->querSeguro){
+            $valorTotal += $valorSeguro;
+        }
+
+        $valorRestante = $valorTotal - $entrada;
+
+        if(strtolower($modoPagamento) == "a vista"){
+            // coloquei um desconto de 5% se pagar a vista :P
+            $valorRestante = $valorRestante * 0.95;
+        }
+        else if(strtolower($modoPagamento) == "parcelado"){
+            switch($numParcelas){
+               case 1:
+                $juros = 0.0; 
+                break;
+            case 2:
+                $juros = 0.02; 
+                break;
+            case 3:
+                $juros = 0.04; 
+                break;
+            case 4:
+                $juros = 0.06; 
+                break;
+            case 5:
+                $juros = 0.08; 
+                break;
+            case 6:
+                $juros = 0.10; 
+                break;
+            default:
+                
+                $juros = 0.12;
+                break;
+            }
+        }
+
+        $valorRestante *= (1 + $juros);
+
+        $valorParcelas = $valorRestante / $numParcelas;
+
+
+        return [
+            'total' => $valorRestante,
+            'parcelas'=> $numParcelas,
+            'valorParcelas'=> $valorParcelas
+        ];
     }
 }
