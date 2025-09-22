@@ -27,19 +27,19 @@ while(true){
             break;
         }
 
+        $op_t = int($op);
 
-
-    switch($op){
-        case '1':
+    switch($op_t){
+        case 1:
             echo "Cadastramento de clientes\n";
 
             break;
             ;
-        case '2':
+        case 2:
             $this->compraCliente();
             break;
             ;
-        case '3':
+        case 3:
             echo "Cadastamento de veículos\n";
             break;
             ;
