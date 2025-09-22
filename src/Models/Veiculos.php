@@ -7,7 +7,7 @@ class SUV extends Carro {
     public $OffRoad;
 
     public function __construct($modelo, $cor, $ano) {
-        parent::__construct($modelo,$ano,$cor);
+        parent::__construct($modelo,$cor,$ano);
         $this->tracao = $tracao;
         $this->OffRoad = $OffRoad;
     }
@@ -18,7 +18,7 @@ class Sedan extends Carro {
     public $conforto;
 
     public function __construct($modelo, $cor, $ano) {
-        parent::__construct($modelo,$ano,$cor);
+        parent::__construct($modelo,$cor,$ano);
         $this->luxo = $luxo;
         $this->conforto = $conforto;   
     }
@@ -29,7 +29,7 @@ class Caminhonete extends Carro {
     public $tipoCabine;
 
     public function __construct($modelo, $cor, $ano) {
-        parent::__construct($modelo,$ano,$cor);
+        parent::__construct($modelo,$cor,$ano);
         $this->capacidadeCarga = $capacidadeCarga;
         $this->tipoCabine = $tipoCabine;
     }

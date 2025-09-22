@@ -2,7 +2,7 @@
 namespace Models;
 
 
-class Pessoa {
+abstract class Pessoa {
     public string $nome;
     public string $sobrenome;
     public int $idade;
