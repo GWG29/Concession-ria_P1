@@ -59,7 +59,7 @@ while(true){
 
 
 // Instanciando normalmente, sem 'use'
-$cliente = new Pessoa();
+$cliente = new Cliente();
 
 $cliente->nome=readline("Digite o nome do cliente: ");
 $cliente->sobrenome=readline("Digite o sobrenome do cliente: ");

@@ -91,4 +91,8 @@ class Clientes extends Pessoa{
             'valorParcelas'=> $valorParcelas
         ];
     }
+
+    protected function cadastroCliente(){
+        
+    }
 }
