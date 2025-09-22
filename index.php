@@ -2,6 +2,9 @@
 
 require_once __DIR__ . '/src/Core/Autoloader.php';
 require_once __DIR__ . '/src/Models/Pessoa.php';
+require_once __DIR__ . '/src/Models/Cliente.php';
+require_once __DIR__ . '/src/Models/Carro.php';
+require_once __DIR__ . '/src/Models/Veiculos.php';
 
 use src\Models\Pessoa;
 
