@@ -21,21 +21,42 @@ class Clientes extends Pessoa{
         
     }
 
-    public function getModelo($modeloComprado){
+    public function getModelo(): string {
+        return $this->modeloComprado;
+    }
+
+    public function setModelo(string $modeloComprado): void {
         $this->modeloComprado = $modeloComprado;
     }
 
-    public function getCor($corCarro){
+    public function getCor(): string {
+        return $this->corCarro;
+    }
+
+    public function setCor(string $corCarro): void {
         $this->corCarro = $corCarro;
     }
 
-    public function getModoPagamento($modoPagamento){
-        $this->getModoPagamento = $modoPagamento;
+    public function getModoPagamento(): string {
+        return $this->modoPagamento;
     }
 
-    public function getSeguro($querSeguro){
+    public function setModoPagamento(string $modoPagamento): void {
+        $this->modoPagamento = $modoPagamento;
+    }
+
+    public function getSeguro(): string {
+        return $this->Seguro;
+    }
+
+    public function getQuerSeguro(): bool {
+        return $this->querSeguro;
+    }
+
+    public function setQuerSeguro(bool $querSeguro): void {
         $this->querSeguro = $querSeguro;
     }
+
 
     public function compraCliente($modoPagamento,$modeloComprado,$querSeguro,$entrada,$precoCarro,$valorSeguro,$numParcelas = 1): string{
         $this->modoPagamento = $modoPagamento;
