@@ -2,22 +2,22 @@
 
 namespace Models;
 
-use src\Models\Pessoa;
+use Models\Pessoa;
 
-class Clientes extends Pessoa{
+class Cliente extends Pessoa{
     public string $modeloComprado;
     public string $corCarro;
     public string $modoPagamento;
     public string $Seguro;
     public bool $querSeguro;
 
-    public function __construct($modeloComprado, $corCarro,$modoPagamento,$Seguro){
-        parent::__construct($nome,$idade,$cpf,$rg,$endereco);
+    public function __construct($nome = "", $idade = 0, $cpf = "", $rg = "", $endereco = "", $modeloComprado = "", $corCarro = "", $modoPagamento = "", $Seguro = ""){
+        parent::__construct($nome, "", $idade, $cpf, $rg, $endereco);
         $this->modeloComprado = $modeloComprado;
         $this->corCarro = $corCarro;
         $this->modoPagamento = $modoPagamento;
         $this->Seguro = $Seguro;
-        strtolower($this->Seguro) === 'sim' ? $this->querSeguro = true : $this->querSeguro = false;
+        $this->querSeguro = strtolower($this->Seguro) === 'sim';
         
     }
 
@@ -58,7 +58,7 @@ class Clientes extends Pessoa{
     }
 
 
-    public function compraCliente($modoPagamento,$modeloComprado,$querSeguro,$entrada,$precoCarro,$valorSeguro,$numParcelas = 1): string{
+    public function compraCliente($modoPagamento,$modeloComprado,$querSeguro,$entrada,$precoCarro,$valorSeguro,$numParcelas = 1): array{
         $this->modoPagamento = $modoPagamento;
         $this->modeloComprado = $modeloComprado;
         $this->querSeguro = $querSeguro;
@@ -69,6 +69,7 @@ class Clientes extends Pessoa{
         }
 
         $valorRestante = $valorTotal - $entrada;
+        $juros = 0.0; // Inicializar a variável
 
         if(strtolower($modoPagamento) == "a vista"){
             // coloquei um desconto de 5% se pagar a vista :P

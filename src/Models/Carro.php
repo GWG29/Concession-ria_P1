@@ -26,7 +26,7 @@ abstract class Carro{
         $this->preco = $preco;
         $this->origem = $origem;
         $this->ehUsado = $ehUsado;
-        $this->km = $km;
+        $this->kmRodados = $km;
         $this->ehAutomatico = $ehAutomatico;
         $this->combustivel = $combustivel;
         $this->portas = $portas;
