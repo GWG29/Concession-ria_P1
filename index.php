@@ -34,12 +34,77 @@ while(true){
 
     switch($op_t){
         case 1:
-            echo "Cadastramento de clientes\n";
+            echo "Idade: \n";
+            $idade = (int) trim(readline());
+            echo "CPF: \n";
+            $cpf = trim(readline());
+            echo "RG: \n";
+            $rg = trim(readline());
+            echo "Endereço: \n";
+            $endereco = trim(readline());
 
+            // Dados específicos
+            echo "Modelo do carro comprado: \n";
+            $modeloComprado = trim(readline());
+
+            echo "Cor do carro: \n";
+            $corCarro = trim(readline());
+
+            echo "Modo de pagamento: \n";
+            $modoPagamento = trim(readline());
+
+            echo "Quer seguro? (sim/não): \n";
+            $seguro = trim(readline());
+           
+            // Instância/cadastra o cliente 
+            $cliente = new Cliente($nome, $idade, $cpf, $rg, $endereco, $modeloComprado, $corCarro, $modoPagamento, $seguro);
+            
+            echo $resultado . "\n";
+
+            echo "Pressione Enter para continuar...";
+            readline();
             break;
+
             ;
         case 2:
-            $this->compraCliente();
+           // Dados da compra
+            echo "Modo de pagamento (a vista/parcelado): \n";
+            $modoPagamento = trim(readline());
+
+            echo "Modelo comprado: \n";
+            $modeloComprado = trim(readline());
+
+            echo "Quer seguro? (1 para sim, 0 para não): \n";
+            $querSeguro = (bool) (int) trim(readline());
+
+            echo "Valor da entrada: \n";
+            $entrada = (float) trim(readline());
+
+            echo "Preço do carro: \n";
+            $precoCarro = (float) trim(readline());
+
+            echo "Valor do seguro: \n";
+            $valorSeguro = (float) trim(readline());
+
+            echo "Número de parcelas (padrão = 1): \n";
+            $numParcelas = (int) trim(readline()) ?: 1;
+
+            $resultado = $cliente->compraCliente($modoPagamento, $modeloComprado, $querSeguro, $entrada, $precoCarro, $valorSeguro, $numParcelas);
+           
+            echo "Compra Realizada com sucesso!";
+            // Usei o number format pra poder formatar o valor e exibir melhor como dados financeiros
+            // Assim consigo formatar pro formato brasileiro de exibição monetária
+            // '.' pra separar os milhares, ',' pros centavos, '2' zeros depois da vírgula...
+            echo "Total: R$ " . number_format($resultado['total'], 2, ',', '.') . "\n";
+
+            echo "Parcelas: " . $resultado['parcelas'] . "\n";
+
+            // mesma coisa do uso de number format ali em cima, porém pro valor das parcelas :P
+            echo "Valor por parcela: R$ " . number_format($resultado['valorParcelas'], 2, ',', '.') . "\n";
+            
+            echo "Pressione Enter para continuar...";
+            readline();
+            
             break;
             ;
         case 3:
