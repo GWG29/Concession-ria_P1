@@ -16,9 +16,8 @@ abstract class Carro{
     public string $combustivel;
     public string $status;
     public int $portas;
-    public string $conducao;
     
-    public function __construct($marca, $modelo, $ano, $cor, $preco, $origem, $ehUsado, $km, $ehAutomatico, $combustivel, $status, $portas, $conducao) {
+    public function __construct($marca, $modelo, $ano, $cor, $preco, $origem, $ehUsado, $km, $ehAutomatico, $combustivel, $status, $portas) {
         $this->modelo = $modelo;
         $this->cor = $cor;
         $this->ano = $ano;
@@ -31,6 +30,5 @@ abstract class Carro{
         $this->combustivel = $combustivel;
         $this->portas = $portas;
         $this->status = $status;
-        $this->conducao = $conducao;
     }
 }

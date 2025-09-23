@@ -15,12 +15,14 @@ use Models\Caminhonete;
 // Arrays globais para simular banco de dados
 $carrosDisponiveis = [];
 $clientesCadastrados = [];
+$todosVeiculos = [];
 
 function inicializarCarros() {
-    global $carrosDisponiveis;
+    global $carrosDisponiveis, $todosVeiculos;
     
     // Iniciar com array vazio - carros serão adicionados via cadastro manual
     $carrosDisponiveis = [];
+    $todosVeiculos = [];
 }
 
 function mostrarCarrosDisponiveis() {
@@ -89,6 +91,7 @@ function Menu(): void{
     echo "1 - Cadastrar clientes\n";
     echo "2 - Realizar compra\n";
     echo "3 - Cadastrar veículos\n";
+    echo "4 - Ver todos os veículos cadastrados\n";
     echo "0 - Sair do programa\n";
 }
 
@@ -100,14 +103,14 @@ while(true){
         echo "Digite a opção escolhida: \n";
         $op = readline();
 
-        if(strtolower(trim($op)) == "0"){
-            // seguindo o exemplo de CLI, saímos do programa caso seja '0'
-            break;
-        }
-
         $op_t = (int)$op;
 
     switch($op_t){
+        case 0:
+            echo "Saindo do programa...\n";
+            exit(0);
+            break;
+            
         case 1:
             echo "Nome: \n";
             $nome = trim(readline());
@@ -277,14 +280,42 @@ while(true){
             $preco = (float) trim(readline());
             echo "É usado? (sim/não): \n";
             $ehUsado = strtolower(trim(readline())) === 'sim';
-            echo "Km rodados: \n";
-            $km = (int) trim(readline());
+            
+            if($ehUsado) {
+                echo "Km rodados: \n";
+                $km = (int) trim(readline());
+            } else {
+                $km = 0; // Veículo novo = 0 km
+                echo "Veículo novo definido com 0 km.\n";
+            }
+            
             echo "É automático? (sim/não): \n";
             $ehAutomatico = strtolower(trim(readline())) === 'sim';
             echo "Combustível: \n";
             $combustivel = trim(readline());
-            echo "Status: \n";
-            $status = trim(readline());
+            echo "Status:\n";
+            echo "1 - Pronto para venda\n";
+            echo "2 - Não está à venda\n";
+            echo "3 - Em manutenção\n";
+            echo "Escolha o status: \n";
+            $statusOpcao = (int) trim(readline());
+            
+            switch($statusOpcao) {
+                case 1:
+                    $status = "Pronto para venda";
+                    break;
+                case 2:
+                    $status = "Não está à venda";
+                    break;
+                case 3:
+                    $status = "Em manutenção";
+                    break;
+                default:
+                    $status = "Não está à venda";
+                    echo "Opção inválida, definido como 'Não está à venda'\n";
+                    break;
+            }
+            
             echo "Número de portas: \n";
             $portas = (int) trim(readline());
             
@@ -295,7 +326,7 @@ while(true){
                     echo "É OffRoad? (sim/não): \n";
                     $offRoad = strtolower(trim(readline())) === 'sim';
                     
-                    $veiculo = new SUV($marca, $modelo, $ano, $cor, $preco, "", $ehUsado, $km, $ehAutomatico, $combustivel, $status, $portas, "", $tracao, $offRoad);
+                    $veiculo = new SUV($marca, $modelo, $ano, $cor, $preco, "", $ehUsado, $km, $ehAutomatico, $combustivel, $status, $portas, $tracao, $offRoad);
                     echo "SUV cadastrado com sucesso!\n";
                     break;
                     
@@ -305,7 +336,7 @@ while(true){
                     echo "Nível de conforto: \n";
                     $conforto = trim(readline());
                     
-                    $veiculo = new Sedan($marca, $modelo, $ano, $cor, $preco, "", $ehUsado, $km, $ehAutomatico, $combustivel, $status, $portas, "", $luxo, $conforto);
+                    $veiculo = new Sedan($marca, $modelo, $ano, $cor, $preco, "", $ehUsado, $km, $ehAutomatico, $combustivel, $status, $portas, $luxo, $conforto);
                     echo "Sedan cadastrado com sucesso!\n";
                     break;
                     
@@ -315,7 +346,7 @@ while(true){
                     echo "Tipo de cabine: \n";
                     $tipoCabine = trim(readline());
                     
-                    $veiculo = new Caminhonete($marca, $modelo, $ano, $cor, $preco, "", $ehUsado, $km, $ehAutomatico, $combustivel, $status, $portas, "", $capacidadeCarga, $tipoCabine);
+                    $veiculo = new Caminhonete($marca, $modelo, $ano, $cor, $preco, "", $ehUsado, $km, $ehAutomatico, $combustivel, $status, $portas, $capacidadeCarga, $tipoCabine);
                     echo "Caminhonete cadastrada com sucesso!\n";
                     break;
                     
@@ -325,26 +356,84 @@ while(true){
             }
             
             if(isset($veiculo)) {
-                // Adicionar o veículo à lista de carros disponíveis
-                global $carrosDisponiveis;
-                $carrosDisponiveis[] = $veiculo;
+                // Adicionar o veículo à lista de todos os veículos
+                global $carrosDisponiveis, $todosVeiculos;
+                $todosVeiculos[] = $veiculo;
+                
+                // Adicionar à lista de carros disponíveis apenas se estiver pronto para venda
+                if($status === "Pronto para venda") {
+                    $carrosDisponiveis[] = $veiculo;
+                    $mensagemDisponibilidade = "Veículo adicionado à lista de carros disponíveis para compra!";
+                } else {
+                    $mensagemDisponibilidade = "Veículo cadastrado mas não está disponível para compra (Status: " . $status . ")";
+                }
                 
                 echo "\n=== DADOS DO VEÍCULO ===\n";
-                echo "Tipo: " . basename(get_class($veiculo)) . "\n";
+                echo "Tipo: " . basename(str_replace('\\', '/', get_class($veiculo))) . "\n";
                 echo "Marca: " . $veiculo->marca . "\n";
                 echo "Modelo: " . $veiculo->modelo . "\n";
                 echo "Ano: " . $veiculo->ano . "\n";
                 echo "Cor: " . $veiculo->cor . "\n";
                 echo "Preço: R$ " . number_format($veiculo->preco, 2, ',', '.') . "\n";
-                echo "Status: " . ($veiculo->ehUsado ? "Usado" : "Novo") . "\n";
+                echo "Condição: " . ($veiculo->ehUsado ? "Usado" : "Novo") . "\n";
                 echo "Combustível: " . $veiculo->combustivel . "\n";
                 echo "Transmissão: " . ($veiculo->ehAutomatico ? "Automático" : "Manual") . "\n";
-                echo "\nVeículo adicionado à lista de carros disponíveis para compra!\n";
+                echo "Status: " . $veiculo->status . "\n";
+                echo "\n" . $mensagemDisponibilidade . "\n";
             }
             
             echo "\nPressione Enter para continuar...";
             readline();
             break;
+            
+        case 4:
+            echo "=== TODOS OS VEÍCULOS CADASTRADOS ===\n\n";
+            global $todosVeiculos, $carrosDisponiveis;
+            
+            if(empty($todosVeiculos)) {
+                echo "Nenhum veículo cadastrado.\n";
+            } else {
+                echo "Total de veículos encontrados: " . count($todosVeiculos) . "\n\n";
+                
+                // Mostrar todos os veículos diretamente
+                foreach($todosVeiculos as $index => $veiculo) {
+                    $tipo = basename(str_replace('\\', '/', get_class($veiculo)));
+                    
+                    echo "=== VEÍCULO " . ($index + 1) . " ===\n";
+                    echo "Tipo: " . $tipo . "\n";
+                    echo "Marca: " . $veiculo->marca . "\n";
+                    echo "Modelo: " . $veiculo->modelo . "\n";
+                    echo "Ano: " . $veiculo->ano . "\n";
+                    echo "Cor: " . $veiculo->cor . "\n";
+                    echo "Preço: R$ " . number_format($veiculo->preco, 2, ',', '.') . "\n";
+                    echo "Condição: " . ($veiculo->ehUsado ? "Usado" : "Novo") . "\n";
+                    if($veiculo->ehUsado) {
+                        echo "Km: " . number_format($veiculo->kmRodados, 0, ',', '.') . " km\n";
+                    }
+                    echo "Combustível: " . $veiculo->combustivel . "\n";
+                    echo "Transmissão: " . ($veiculo->ehAutomatico ? "Automático" : "Manual") . "\n";
+                    echo "Portas: " . $veiculo->portas . "\n";
+                    echo "STATUS: " . $veiculo->status . "\n";
+                    
+                    // Mostrar características específicas
+                    if($tipo === 'SUV' && isset($veiculo->tracao) && $veiculo->tracao) {
+                        echo "Tração: " . $veiculo->tracao . "\n";
+                        echo "OffRoad: " . ($veiculo->OffRoad ? "Sim" : "Não") . "\n";
+                    } elseif($tipo === 'Sedan' && isset($veiculo->luxo) && $veiculo->luxo) {
+                        echo "Luxo: " . $veiculo->luxo . "\n";
+                        echo "Conforto: " . $veiculo->conforto . "\n";
+                    } elseif($tipo === 'Caminhonete' && isset($veiculo->capacidadeCarga) && $veiculo->capacidadeCarga) {
+                        echo "Capacidade de carga: " . $veiculo->capacidadeCarga . " kg\n";
+                        echo "Tipo de cabine: " . $veiculo->tipoCabine . "\n";
+                    }
+                    echo "\n" . str_repeat("-", 40) . "\n\n";
+                }
+            }
+            
+            echo "\nPressione Enter para continuar...";
+            readline();
+            break;
+            
         default:
             echo "Opção inválida, pressione qualquer tecla para continuar\n";
             readline();
