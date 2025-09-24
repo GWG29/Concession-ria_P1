@@ -3,10 +3,9 @@ Projeto para a prova P1 de Programação Orientada a Objetos
 
 # Integrantes
 
-- Mateus Yan Molder de Andrade Custodio;
-- Giovanna Raymondo dos Santos;
-- Levi Cohen Silva;
-- Marcos Henrique D'Aloia Junior.
+- Mateus Yan Molder de Andrade Custodio, RA: 2037940;
+- Levi Cohen Silva, RA: 2034499;
+- Marcos Henrique D'Aloia Junior, RA: 2036111.
 
 # Funcionamento do programa
 
